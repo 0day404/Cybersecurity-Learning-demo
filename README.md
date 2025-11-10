@@ -100,8 +100,6 @@ weblogic POC返回包分析调用栈
 
 ###  Weblogic  IIOP协议反序列化（CVE-2020-2551）
 
-https://github.com/0day404/Cybersecurity-Learning-demo/tree/main/IIOPDemo
-
 #### 1、理解IIOP协议
 *IIOP，Internet Inter-ORB Protocol(互联网内部对象请求代理协议)*
 
@@ -116,6 +114,7 @@ java.exe -classpath build org.example.Client
 #### 2、利用链分析
 Weblogic CVE-2020-2551 IIOP协议反序列化RCE利用链分析
 参考： https://mp.weixin.qq.com/s/SQdyXS1LNOgfP7QD93XGaw
+
 **实现Jndi注入**：*JtaTransactionManager*#*readObject:1192*
 **实现IIOP协议**：*IIOPInputStream:1725*
 入口source点：*readObject:314*, *ObjectStreamClass* (*weblogic.utils.io*)
