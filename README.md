@@ -6,9 +6,13 @@
 ## weblogic
 
 Weblogic反序列化漏洞经过了几个阶段，利用技术也有多种变形。
+
 从利用方式来看，只要分为三类：
+
 1、前期是直接通过**T3协议**发送恶意反序列化对象;(*CVE-2015-4582*, *CVE-2016-0638*, *CVE-2016-3510*, *CVE-2020-2555*，*CVE-2020-2883*)
+
 2、后期利用T3协议配合**JRMP**或**JNDI**接口反向发送反序列化数据(*CVE-2017-3248*, *CVE-2018-2628*, *CVE-2018-2893*, *CVE2018-3245*、*CVE-2018-3191*、*CVE-2020-14644*、*CVE-2020-14645*)还有利用**IIOP协议**的*CVE-2020-2551*;
+
 3、 通过**Javabean XML**方式发送反序列化数据。(*CVE-2017-3506*->*CVE-2017-10271*->*CVE-2019-2725*->*CVE-2019-2729*)
 
 ###  WebLogic XMLDecoder反序列化
@@ -17,21 +21,11 @@ WebLogic XMLDecoder 反序列化RCE（CVE-2017-3506、 CVE-2017-10271、 CVE-201
 
 #### 文章参考
 
- Win7快速部署weblogic **10.3.6**
-https://blog.csdn.net/counsellor/article/details/114527476
+ Win7快速部署weblogic **10.3.6** https://blog.csdn.net/counsellor/article/details/114527476
 
+WebLogic XMLDecoder 反序列化RCE分析参考 https://shu1l.github.io/2021/02/09/weblogic-xmldecoder-fan-xu-lie-hua-lou-dong-xue-xi/
 
-
-WebLogic XMLDecoder 反序列化RCE分析参考
-
-https://shu1l.github.io/2021/02/09/weblogic-xmldecoder-fan-xu-lie-hua-lou-dong-xue-xi/
-
-
-
-weblogic 下载地址
-
-https://pan.baidu.com/s/15urXLHftydGZFpO87DQsbg
-提取码：9x26
+weblogic 下载地址 https://pan.baidu.com/s/15urXLHftydGZFpO87DQsbg 提取码：9x26
 
 ####  项目配置
 
@@ -48,11 +42,11 @@ new ProcessBuilder("calc").start();  //命令执行
 new ProcessBuilder("cmd", "/c", "calc").start();//命令执行
 ```
 总结：**XMLDecoder反序列化时能让对象执行指定方法（如上述start）**
+
 原理：**以WebLogic为例，其WLS Security组件对外提供webservice服务时，使用了XMLDecoder来解析用户传入的XML 数据，在解析过程中就出现了反序列化漏洞。**
 
 #### WebLogic利用链分析
-复现利用：
-访问后台，替换请求头，改为Post，在XML数据修改命令即可
+复现利用：访问后台，替换请求头，改为Post，在XML数据修改命令即可
 
 POC：
 ```xml
@@ -88,12 +82,19 @@ Content-Length: 667
 ```
 
 weblogic POC返回包分析调用栈
+
 ->*weblogic.wsee.jaxws.workcontext.WorkContextServerTube-*>*processRequest*
+
 ->*weblogic.wsee.jaxws.workcontext.WorkContextTube*->*readHeaderOld*
+
 ->*weblogic.wsee.jaxws.workcontext.WorkContextServerTube*->*receive*
+
 ->*weblogic.workarea.WorkContextMapImpl*->*receiveRequest*
+
 ->*weblogic.workarea.WorkContextLocalMap*->*receiveRequest*
+
 ->*weblogic.workarea.spi.WorkContextEntryImpl*->*readEntry*
+
 ->*weblogic.wsee.workarea.WorkContextXmlInputAdapter*->*readUTF*->*xmlDecoder.readObject()*
 
 
@@ -113,10 +114,13 @@ java.exe -classpath build org.example.Client
 
 #### 2、利用链分析
 Weblogic CVE-2020-2551 IIOP协议反序列化RCE利用链分析
+
 参考： https://mp.weixin.qq.com/s/SQdyXS1LNOgfP7QD93XGaw
 
 **实现Jndi注入**：*JtaTransactionManager*#*readObject:1192*
+
 **实现IIOP协议**：*IIOPInputStream:1725*
+
 入口source点：*readObject:314*, *ObjectStreamClass* (*weblogic.utils.io*)
 
 ```java
