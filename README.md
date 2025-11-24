@@ -168,3 +168,45 @@ comment=T(java.lang.Runtime).getRuntime().exec('calc')
 
 实现Java代码执行
 
+# PHP
+
+使用phpstudy搭建启动
+
+## RCE
+
+项目名：PHP_RCE
+
+使用php7.4.3
+
+演示各种可能存在rce的功能点
+
+/1.php
+
+动态代码执行平台
+
+
+
+/2.php
+
+ Windows服务器管理
+
+
+
+/3.php
+
+企业数据分析平台
+
+
+
+/upload.html
+
+文件上传
+
+/test.php
+
+文件上传+文件上传实现rce
+
+```http
+http://localhost:82/73/test.php?file=1.txt&x=phpinfo();
+```
+
