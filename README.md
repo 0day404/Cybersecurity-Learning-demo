@@ -172,9 +172,22 @@ comment=T(java.lang.Runtime).getRuntime().exec('calc')
 
 使用phpstudy搭建启动
 
-## RCE
+### RCE
 
-项目名：PHP_RCE
+### RCE有回显 &无回显
+#### 1、直接写个文件访问查看
+执行命令将结果或特征写入到目标服务器的某个 **Web 目录或可访问路径** 中，然后通过 HTTP 请求访问这个文件，来判断是否执行成功。
+#### 2、直接进行对外访问接受
+构造 payload，让目标服务器执行命令或 Java 对象，在执行时 **向外部服务器发起请求**（如 DNS 查询或 HTTP 请求）。你可以搭建监听服务或使用平台（如 `Burp Collaborator`, `ceye.io`, `dnslog.cn`）来观察这些出网行
+##### DNS 外带（最隐蔽）
+ping （未禁用ICMP）
+nslookup
+
+##### HTTP 外带
+curl
+wget
+
+### 项目：PHP_RCE
 
 使用php7.4.3
 
@@ -190,7 +203,7 @@ comment=T(java.lang.Runtime).getRuntime().exec('calc')
 
  Windows服务器管理
 
-
+无回显
 
 /3.php
 
@@ -200,7 +213,15 @@ comment=T(java.lang.Runtime).getRuntime().exec('calc')
 
 /upload.html
 
-文件上传
+文件上传控制文件名实现rce
+
+抓包控制文件名test.php & calc
+
+```
+filename="test.php & calc"
+```
+
+
 
 /test.php
 
