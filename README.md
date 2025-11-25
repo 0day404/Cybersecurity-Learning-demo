@@ -172,7 +172,7 @@ comment=T(java.lang.Runtime).getRuntime().exec('calc')
 
 使用phpstudy搭建启动
 
-### RCE
+## RCE
 
 ### RCE有回显 &无回显
 #### 1、直接写个文件访问查看
@@ -193,41 +193,64 @@ wget
 
 演示各种可能存在rce的功能点
 
-/1.php
+/1.php：动态代码执行平台
 
-动态代码执行平台
+/2.php： Windows服务器管理；无回显
 
+/3.php：企业数据分析平台
 
-
-/2.php
-
- Windows服务器管理
-
-无回显
-
-/3.php
-
-企业数据分析平台
-
-
-
-/upload.html
-
-文件上传控制文件名实现rce
-
-抓包控制文件名test.php & calc
+/upload.html：文件上传控制文件名实现rce；抓包控制文件名test.php & calc
 
 ```
 filename="test.php & calc"
 ```
 
-
-
-/test.php
-
-文件上传+文件上传实现rce
+/test.php：文件上传+文件上传实现rce
 
 ```http
 http://localhost:82/73/test.php?file=1.txt&x=phpinfo();
 ```
+
+## unserialize
+
+#### 反序列化出现安全漏洞的原因：
+
+##### 原理：
+未对用户输入的序列化字符串进行检测，导致攻击者可以控制反序列化过程，从而导致代码执行，SQL 注入，目录遍历等不可控后果。
+在反序列化的过程中自动触发了某些魔术方法。当进行反序列化的时候就有可能会触发对象中的一些魔术方法。
+
+#### php反序列化常见魔术方法
+
+```php
+__construct(): //当对象new的时候会自动调用
+__destruct()：//当对象被销毁时会被自动调用(两种情况，unset主动销毁或者程序结束)
+__sleep(): //serialize()执行时被自动调用
+__wakeup(): //unserialize()时会被自动调用
+__invoke(): //当尝试以调用函数的方法调用一个对象时会被自动调用
+__toString(): //把类当作字符串使用时触发
+__call(): //调用某个方法;若不存在,则会去调用__call函数。
+__callStatic(): //在静态上下文中调用不可访问的方法时触发
+__get(): //读取对象属性时,若不存在，则会调用__get函数
+__set(): //设置对象的属性时,若不存在,则调用__set函数。
+__isset(): //在不可访问的属性上调用isset()或empty()触发
+__unset(): //在不可访问的属性上使用unset()时触发
+__set_state()，//调用var_export()导出类时，此静态方法会被调用
+__clone()，//当对象复制完成时调用
+__autoload()，//尝试加载未定义的类
+__debugInfo()，//打印所需调试信息
+```
+
+### 项目PHP_unserialize
+
+#### day1
+
+/1.php：反序列化简单demo
+
+/4.php 序列化简单demo
+
+/2.php：php反序列化常见魔术方法
+
+/3.php  反序列化漏洞案例
+
+/pop.php POP链简单构造
 
