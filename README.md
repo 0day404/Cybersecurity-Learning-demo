@@ -217,9 +217,7 @@ http://localhost:82/73/test.php?file=1.txt&x=phpinfo();
 
 #### day1
 
-**Web攻防-PHP反序列化&魔术方法&触发条件&POP链构造&变量属性修改&黑白盒角度**
-
-文章 
+**Web攻防-PHP反序列化&魔术方法&触发条件&POP链构造&变量属性修改&黑白盒角度**[文章](https://github.com/0day404/Cybersecurity-Learning-demo/blob/main/PHP_Demo/PHP_unserialize/day1/READEME.md) [代码](https://github.com/0day404/Cybersecurity-Learning-demo/tree/main/PHP_Demo/PHP_unserialize/day1)
 
 /1.php：反序列化简单demo
 
@@ -231,7 +229,11 @@ http://localhost:82/73/test.php?file=1.txt&x=phpinfo();
 
 /pop.php POP链简单构造
 
+
 #### day2
 
-#### **PHP反序列化&原生内置&Exception类&SoapClient类&SimpleXMLElement**
+**PHP反序列化&原生内置&Exception类&SoapClient类&SimpleXMLElement** [文章](https://github.com/0day404/Cybersecurity-Learning-demo/blob/main/PHP_Demo/PHP_unserialize/day2/READEME.md) [代码](https://github.com/0day404/Cybersecurity-Learning-demo/tree/main/PHP_Demo/PHP_unserialize/day2) 
 
+### day3
+
+**PHP反序列化&字符逃逸&增多减少&成员变量属性&解析不敏感&Wakeup绕过** [文章](https://github.com/0day404/Cybersecurity-Learning-demo/blob/main/PHP_Demo/PHP_unserialize/day3/READEME.md) [代码](https://github.com/0day404/Cybersecurity-Learning-demo/tree/main/PHP_Demo/PHP_unserialize/day3) 
